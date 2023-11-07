@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int eliminateMaximum(vector<int>& dist, vector<int>& speed) {
+        int n = dist.size();
+        vector<int>t(n);
+         for(int i=0;i<n;i++)
+         {
+             t[i] = ceil((float)dist[i]/speed[i]);
+         }
+        sort(t.begin(),t.end());
+        
+        for(int i=0;i<n-1;i++)
+        {
+            int gun_s = i+1;
+          if(t[i]==t[i+1] && t[i]<=gun_s)
+      
+              return i+1;
+        }
+        return n;
+    }
+};
