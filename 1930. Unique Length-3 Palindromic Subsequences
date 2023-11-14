@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int countPalindromicSubsequence(string s) {
+        vector<int>l(26,0);
+        vector<int>r(26,0);
+        unordered_set<string>h;
+        
+        for(int i=0;i<s.size();i++)
+        {
+            r[s[i]-'a']++;
+        }
+        
+        for(int i=0;i<s.size();i++)
+        {
+            r[s[i]-'a']--;
+            for(int j=0;j<26;j++)
+            {
+                if(l[j]>0 && r[j]>0)
+                {
+                    char x = 'a'+j;
+                    string p = "";
+                    p+=x;
+                    p+=s[i];
+                    p+=x;
+                    
+                    if(h.count(p)==true){
+                        continue;
+                    }
+                    h.insert(p);
+                    
+                }
+                
+            }
+            l[s[i]-'a']++;
+        }
+        
+       return h.size(); 
+    }
+};
