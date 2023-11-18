@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int maxFrequency(vector<int>& nums, int k) {
+          int n=nums.size();
+       sort(nums.begin(), nums.end()); 
+       int i=0 , j=1 , c=1 , maxi=0;
+
+       if(n==1) return 1;
+
+       while(j<n)
+       {
+           long diff = nums[j] - nums[j-1];
+            if(diff * c <= k)
+            {
+                k -= (diff * c);
+                c++;
+                j++;
+            }
+            else
+            {
+                k += nums[j-1] - nums[i];
+                i++;  
+                c--;
+            }
+
+            maxi= max(maxi,c);
+       }
+
+       return maxi;
+    }
+};
