@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
+      int n=nums.size();
+        vector<int>ans;
+        vector<int>addright(n+1,0),addleft(n+1,0);
+        addleft[1]=nums[0];
+        addright[n-1]=nums[n-1];
+        for(int i=1;i<=n;i++){
+            addleft[i]=nums[i-1]+addleft[i-1];
+            addright[n-i]=nums[n-i]+addright[n-i+1];
+        }
+        for(int i=0;i<n;i++){
+            ans.push_back(nums[i]*(i-(n-i-1))+addright[i+1]-addleft[i]);
+        }
+        return ans; 
+    }
+};
