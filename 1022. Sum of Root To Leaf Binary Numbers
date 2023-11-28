@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int sumRootToLeaf(TreeNode* root,int sum=0) {
+        if(root == NULL)
+        {
+            return 0;
+        }
+        sum = sum * 2 + root->val;
+        if(root -> left == NULL && root -> right == NULL)
+        {
+            return sum;
+        }
+        int left = sumRootToLeaf(root->left,sum);
+        int right = sumRootToLeaf(root->right,sum);
+        
+        return left + right;
+    }
+};
