@@ -1,0 +1,70 @@
+class Solution {
+public:
+    int countCharacters(vector<string>& words, string chars) {
+//      int count= 0;
+//         set<char>s1;
+//         for(auto i:chars)
+//         {
+//             s1.insert(i);
+//         }
+//         int m = 0;
+//         for(int i =0;i<words.size();i++)
+//         {
+//             while(m<words.size())
+//             {
+//             unordered_map<int,char>s2;
+//              for(int j=0;j<words[i].size();j++)
+//              {
+//                  s2[j]=words[i][j];
+//              }
+                 
+//                 for(auto n:s2.second)
+//                 {
+//                     if(s1.find(n)!=s1.end())
+//                     {
+//                         count++;
+//                     }
+//                     else
+//                     {
+//                         break;
+//                     }
+//                 }
+//                 m++;
+//             }
+//         }
+//         return count;
+//     }
+         vector<int> counts(26, 0);
+        
+       
+        for (char ch : chars) {
+            counts[ch - 'a']++;
+        }
+
+        int result = 0;
+
+       
+        for (const std::string& word : words) {
+            if (canForm(word, counts)) {
+                
+                result += word.length();
+            }
+        }
+             return result;
+    }
+
+    bool canForm(const std::string& word, std::vector<int>& counts) {
+        std::vector<int> c(26, 0);
+
+        
+        for (char ch : word) {
+            int x = ch - 'a';
+            c[x]++;
+            if (c[x] > counts[x]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
